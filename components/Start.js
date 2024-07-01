@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, ImageBackground, KeyboardAvoidingView, Platform } from 'react-native';
 
 const Start = ({ navigation }) => {
   const colors = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
@@ -46,6 +46,8 @@ const Start = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </ImageBackground>
+      {/* Conditional to fix the iOS keyboard not to hide the name input */}
+      {Platform.OS === "ios" ? <KeyboardAvoidingView behavior="padding" /> : null}
     </View>
   );
 }
@@ -87,14 +89,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '300',
     color: "#757083",
-    opacity: "50%",
+    opacity: 50,
   },
   bgColorPaletteText: {
     width: "88%",
     fontSize: 16,
     fontWeight: "300",
     color: "#757083",
-    opacity: "100%",
+    opacity: 100,
     marginBottom: 10,
   },
   bgColorPaletteIcons: {
