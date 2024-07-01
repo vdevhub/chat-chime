@@ -29,7 +29,8 @@ const Start = ({ navigation }) => {
                   key={index}
                   accessible={true}
                   accessibilityRole="button"
-                  accessibilityHint="Choose background color for your chat screen"
+                  accessibilityLabel="Tap to select"
+                  accessibilityHint="Let's you choose background color for your chat screen"
                   style={[
                     styles.colorButton,
                     { backgroundColor: color }
