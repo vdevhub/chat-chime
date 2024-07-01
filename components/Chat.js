@@ -23,17 +23,17 @@ const Chat = ({ route, navigation }) => {
     setMessages([
       {
         _id: 1,
-        text: 'Hello developer',
+        text: 'Hello developer!',
         createdAt: new Date(),
         user: {
-          _id: 2,
+          _id: 1,
           name: 'React Native',
           avatar: 'https://avatar.iran.liara.run/public/29',
         },
       },
       {
         _id: 2,
-        text: 'This is a system message',
+        text: 'You\'ve entered the chat, welcome!',
         createdAt: new Date(),
         system: true,
       },
@@ -48,7 +48,7 @@ const Chat = ({ route, navigation }) => {
         messages={messages}
         onSend={messages => onSend(messages)}
         user={{
-          _id: 1
+          _id: 2
         }}
       />
       {/* Conditional to fix the Android keyboard not to hide the message input */}
