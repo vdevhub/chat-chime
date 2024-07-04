@@ -6,11 +6,29 @@ import Chat from './components/Chat';
 // Import react Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// Import Firebase
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 // Create the navigator
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+const App = () => {
+  const firebaseConfig = {
+    apiKey: "AIzaSyBT5gervbc_Ktcl6J_9O0DGtTYiSjh8Kr0",
+    authDomain: "chat-chime.firebaseapp.com",
+    projectId: "chat-chime",
+    storageBucket: "chat-chime.appspot.com",
+    messagingSenderId: "481950216373",
+    appId: "1:481950216373:web:c704bb1d71c411d5b00efc"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  // Initialize Cloud Firestore and get a reference to the service
+  const db = getFirestore(app);
+
   return (
     // Create navigator container to wrap up all content
     <NavigationContainer>
@@ -27,8 +45,12 @@ export default function App() {
         <Stack.Screen
           name="Chat"
           component={Chat}
-        />
+        >
+          {props => <Chat db={db} {...props} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+export default App;
