@@ -13,17 +13,19 @@ import { getFirestore } from "firebase/firestore";
 // Create the navigator
 const Stack = createNativeStackNavigator();
 
+const configData = require('./config.json');
+
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(["AsyncStorage has been extracted from", "You are initializing Firebase Auth for React Native without", "Support for defaultProps will be removed"]);
 
 const App = () => {
   const firebaseConfig = {
-    apiKey: "AIzaSyBT5gervbc_Ktcl6J_9O0DGtTYiSjh8Kr0",
-    authDomain: "chat-chime.firebaseapp.com",
-    projectId: "chat-chime",
-    storageBucket: "chat-chime.appspot.com",
-    messagingSenderId: "481950216373",
-    appId: "1:481950216373:web:c704bb1d71c411d5b00efc"
+    apiKey: configData.apiKey,
+    authDomain: configData.authDomain,
+    projectId: configData.projectId,
+    storageBucket: configData.storageBucket,
+    messagingSenderId: configData.messagingSenderId,
+    appId: configData.appId
   };
 
   // Initialize Firebase
