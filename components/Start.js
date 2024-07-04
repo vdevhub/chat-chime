@@ -6,9 +6,11 @@ const Start = ({ navigation }) => {
   const colors = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
   const [name, setName] = useState('');
   const [bgColor, setBackground] = useState('');
-
+  // Initialize Firebase authentication handler
   const auth = getAuth();
 
+  // Sign in function that authenticates the user in Firebase
+  // If success, navigates to the Chat
   const signInUser = () => {
     signInAnonymously(auth)
       .then(result => {
@@ -55,7 +57,7 @@ const Start = ({ navigation }) => {
               ))}
             </View>
           </View>
-          {/* Start Chatting button navigates to the Chat screen upon pressing and passes props */}
+          {/* Start Chatting button calls the sign in function upon pressing */}
           <TouchableOpacity style={styles.button} onPress={signInUser}>
             <Text style={styles.buttonText}>Start Chatting</Text>
           </TouchableOpacity>

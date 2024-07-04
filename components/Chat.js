@@ -9,9 +9,8 @@ const Chat = ({ route, navigation, db }) => {
   // Messages state initialization
   const [messages, setMessages] = useState([]);
   // Callback for when a message is sent
-  // Takes the previous messages and appends new one
+  // Sends the newest message to Firestore
   const onSend = (newMessages) => {
-    // setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages))
     addDoc(collection(db, "messages"), newMessages[0]);
   }
 
@@ -20,7 +19,7 @@ const Chat = ({ route, navigation, db }) => {
     navigation.setOptions({ title: name });
   }, []);
 
-  // Setting the messages state with initial static messages
+  // Sets up an onSnapshot listener on a query targeting the messages collection in Firebase
   useEffect(() => {
     const q = query(collection(db, "messages"), orderBy("createdAt", "desc"));
     const unsubMessages = onSnapshot(q, (documentsSnapshot) => {
@@ -34,7 +33,7 @@ const Chat = ({ route, navigation, db }) => {
       });
       setMessages(newMessages);
     });
-    // Clean up code
+    // Clean up code when the component is unmounted
     return () => {
       if (unsubMessages) unsubMessages();
     }

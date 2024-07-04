@@ -44,11 +44,11 @@ const App = () => {
           name="Start"
           component={Start}
         />
-        {/* One screen is the Chat */}
+        {/* Second screen is the Chat */}
         <Stack.Screen
           name="Chat"
         >
-          {/* Pass firebase db to Chat */}
+          {/* Pass Firebase db object to Chat */}
           {props => <Chat db={db} component={Chat} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
