@@ -13,6 +13,9 @@ import { getFirestore } from "firebase/firestore";
 // Create the navigator
 const Stack = createNativeStackNavigator();
 
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(["AsyncStorage has been extracted from", "You are initializing Firebase Auth for React Native without", "Support for defaultProps will be removed"]);
+
 const App = () => {
   const firebaseConfig = {
     apiKey: "AIzaSyBT5gervbc_Ktcl6J_9O0DGtTYiSjh8Kr0",
@@ -44,10 +47,9 @@ const App = () => {
         {/* One screen is the Chat */}
         <Stack.Screen
           name="Chat"
-          component={Chat}
         >
           {/* Pass firebase db to Chat */}
-          {props => <Chat db={db} {...props} />}
+          {props => <Chat db={db} component={Chat} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
