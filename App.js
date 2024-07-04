@@ -46,6 +46,7 @@ const App = () => {
           name="Chat"
           component={Chat}
         >
+          {/* Pass firebase db to Chat */}
           {props => <Chat db={db} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
