@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert } from 'react-native';
 // Import screens
 import Start from './components/Start';
 import Chat from './components/Chat';
@@ -14,7 +14,7 @@ import { getFirestore } from "firebase/firestore";
 const Stack = createNativeStackNavigator();
 
 import { LogBox } from 'react-native';
-LogBox.ignoreLogs(["AsyncStorage has been extracted from", "You are initializing Firebase Auth for React Native without", "Support for defaultProps will be removed"]);
+LogBox.ignoreLogs(["AsyncStorage has been extracted from", "@firebase", "Support for defaultProps will be removed"]);
 
 const App = () => {
   const firebaseConfig = {
@@ -26,13 +26,18 @@ const App = () => {
     appId: process.env.EXPO_PUBLIC_APP_ID,
   };
 
-  console.log(firebaseConfig);
-
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
   // Initialize Cloud Firestore and get a reference to the service
-  const db = getFirestore(app);
+  const db = () => {
+    try {
+      getFirestore(app);
+    } catch (error) {
+      console.log('Error - could not load Firestore database');
+      Alert.alert('Chat couldn\'t connect to the database. Try again later.');
+    }
+  }
 
   return (
     // Create navigator container to wrap up all content
