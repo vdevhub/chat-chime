@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { Alert } from 'react-native';
 // Import screens
 import Start from './components/Start';
@@ -8,7 +7,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // Import Firebase
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, disableNetwork, enableNetwork } from "firebase/firestore";
+// Import NetInfo for connectivity checks
+import { useNetInfo } from '@react-native-community/netinfo';
+import { useEffect } from "react";
 
 // Create the navigator
 const Stack = createNativeStackNavigator();
@@ -17,6 +19,8 @@ import { LogBox } from 'react-native';
 LogBox.ignoreLogs(["AsyncStorage has been extracted from", "@firebase", "Support for defaultProps will be removed"]);
 
 const App = () => {
+  const connectionStatus = useNetInfo();
+
   const firebaseConfig = {
     apiKey: process.env.EXPO_PUBLIC_API_KEY,
     authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
@@ -27,17 +31,36 @@ const App = () => {
   };
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+  let app = null;
+
+  try {
+    app = initializeApp(firebaseConfig);
+  } catch (error) {
+    console.log('Error - could not initialize connection to Firebase');
+    Alert.alert('Chat couldn\'t initialize connection to the storage service. Try again later.');
+  }
 
   // Initialize Cloud Firestore and get a reference to the service
-  const db = () => {
-    try {
-      getFirestore(app);
-    } catch (error) {
-      console.log('Error - could not load Firestore database');
-      Alert.alert('Chat couldn\'t connect to the database. Try again later.');
-    }
+  let db = null;
+
+  try {
+    db = getFirestore(app);
+  } catch (error) {
+    console.log('Error - could not load Firestore database');
+    Alert.alert('Chat couldn\'t connect to the database. Try again later.');
   }
+
+  // Note that connectionStatus.isConnected is used as a dependency value of useEffect(). 
+  // This means that if this value changes, the useEffect code will be re-executed. 
+  // For example, if you lose connection while using the app, you should see a “Connection lost!” alert.
+  useEffect(() => {
+    if (connectionStatus.isConnected === false) {
+      Alert.alert("Connection Lost!");
+      disableNetwork(db);
+    } else if (connectionStatus.isConnected === true) {
+      enableNetwork(db);
+    }
+  }, [connectionStatus.isConnected]);
 
   return (
     // Create navigator container to wrap up all content
@@ -56,7 +79,7 @@ const App = () => {
           name="Chat"
         >
           {/* Pass Firebase db object to Chat */}
-          {props => <Chat db={db} component={Chat} {...props} />}
+          {props => <Chat isConnected={connectionStatus.isConnected} db={db} component={Chat} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
