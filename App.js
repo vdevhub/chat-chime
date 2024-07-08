@@ -13,20 +13,20 @@ import { getFirestore } from "firebase/firestore";
 // Create the navigator
 const Stack = createNativeStackNavigator();
 
-const configData = require('./config.json');
-
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(["AsyncStorage has been extracted from", "You are initializing Firebase Auth for React Native without", "Support for defaultProps will be removed"]);
 
 const App = () => {
   const firebaseConfig = {
-    apiKey: configData.apiKey,
-    authDomain: configData.authDomain,
-    projectId: configData.projectId,
-    storageBucket: configData.storageBucket,
-    messagingSenderId: configData.messagingSenderId,
-    appId: configData.appId
+    apiKey: process.env.EXPO_PUBLIC_API_KEY,
+    authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
+    projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+    storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
+    messagingSenderId: process.env.EXPO_PUBLIC_MSG_SENDER_ID,
+    appId: process.env.EXPO_PUBLIC_APP_ID,
   };
+
+  console.log(firebaseConfig);
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
