@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
 import { GiftedChat, InputToolbar } from "react-native-gifted-chat";
+import CustomActions from './CustomActions';
 import { collection, addDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -69,12 +70,18 @@ const Chat = ({ route, navigation, db, isConnected }) => {
     else return null;
   }
 
+  // Renders custom actions menu for the chat
+  const renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
   // Return chat screen with the selected color
   // Return GiftedChat component with messages and input
   return (
     <View style={[styles.container, { backgroundColor: bgColor }]}>
       <GiftedChat
         renderInputToolbar={renderInputToolbar}
+        renderActions={renderCustomActions}
         messages={messages}
         onSend={messages => onSend(messages)}
         user={{
