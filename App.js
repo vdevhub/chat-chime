@@ -2,12 +2,13 @@ import { Alert } from 'react-native';
 // Import screens
 import Start from './components/Start';
 import Chat from './components/Chat';
-// Import react Navigation
+// Import React Navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // Import Firebase
 import { initializeApp } from "firebase/app";
 import { getFirestore, disableNetwork, enableNetwork } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 // Import NetInfo for connectivity checks
 import { useNetInfo } from '@react-native-community/netinfo';
 import { useEffect } from "react";
@@ -50,6 +51,16 @@ const App = () => {
     Alert.alert('Chat couldn\'t connect to the database. Try again later.');
   }
 
+  // Initialize Firebase Storage
+  let storage = null;
+
+  try {
+    storage = getStorage(app);
+  } catch (error) {
+    console.log('Error - could not load Firebase Storage');
+    Alert.alert('Chat couldn\'t connect to the file storage. Try again later.');
+  }
+
   // Note that connectionStatus.isConnected is used as a dependency value of useEffect(). 
   // This means that if this value changes, the useEffect code will be re-executed. 
   // For example, if you lose connection while using the app, you should see a “Connection lost!” alert.
@@ -79,7 +90,7 @@ const App = () => {
           name="Chat"
         >
           {/* Pass Firebase db object to Chat */}
-          {props => <Chat isConnected={connectionStatus.isConnected} db={db} component={Chat} {...props} />}
+          {props => <Chat isConnected={connectionStatus.isConnected} db={db} storage={storage} component={Chat} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

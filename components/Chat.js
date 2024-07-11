@@ -6,7 +6,7 @@ import { collection, addDoc, onSnapshot, query, orderBy } from "firebase/firesto
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MapView from 'react-native-maps';
 
-const Chat = ({ route, navigation, db, isConnected }) => {
+const Chat = ({ route, navigation, db, isConnected, storage }) => {
   // Unpack name and bgColor from the route parameters
   const { name, bgColor, userID } = route.params;
   // Messages state initialization
@@ -73,7 +73,7 @@ const Chat = ({ route, navigation, db, isConnected }) => {
 
   // Renders custom actions menu for the chat
   const renderCustomActions = (props) => {
-    return <CustomActions {...props} />;
+    return <CustomActions userID={userID} storage={storage} {...props} />;
   };
 
   // Render custom view
