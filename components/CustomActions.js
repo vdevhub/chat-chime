@@ -83,7 +83,11 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
   }
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onActionPress}>
+    <TouchableOpacity style={styles.container} onPress={onActionPress}
+      accessible={true}
+      accessibilityRole="button"
+      accessibilityLabel="More chat actions"
+      accessibilityHint="Let’s you choose to send an image from your library, take a photo, or share your geolocation">
       <View style={[styles.wrapper, wrapperStyle]}>
         <Text style={[styles.iconText, iconTextStyle]}>+</Text>
       </View>
