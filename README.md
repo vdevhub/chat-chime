@@ -19,7 +19,16 @@ Chat Chime is a chat app for mobile devices using React Native. The app will pro
 
 ## Run the App
 ### Clone repository
-Open your terminal and run:
+Open your terminal and run
 ```
 git clone https://github.com/vdevhub/chat-chime.git
 ```
+### Install Node.js and npm
+Check if you already have Node.js and npm installed
+```
+node -v
+npm -v
+```
+
+If you don't have them instaled, please follow this [guidance](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm) to get them set up.
+
