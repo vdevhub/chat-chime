@@ -27,7 +27,7 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
   // Sets up an onSnapshot listener on a query targeting the messages collection in Firebase
   useEffect(() => {
     if (isConnected === true) {
-      // unregister current onSnapshot() listener to avoid registering multiple listeners when
+      // Unregister current onSnapshot() listener to avoid registering multiple listeners when
       // useEffect code is re-executed
       if (unsubMessages) unsubMessages();
       unsubMessages = null;
@@ -52,6 +52,7 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
     }
   }, [isConnected]);
 
+  // Loades cached messages from the AsyncStorage
   const loadCachedMessages = async () => {
     const cachedMessages = await AsyncStorage.getItem("chat_messages") || [];
     setMessages(JSON.parse(cachedMessages));
@@ -66,6 +67,7 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
     }
   }
 
+  // Renders input toolbar if the device is connected to the internet
   const renderInputToolbar = (props) => {
     if (isConnected) return <InputToolbar {...props} />;
     else return null;

@@ -5,8 +5,10 @@ import * as Location from 'expo-location';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID }) => {
+  // Fetching an action sheet from Expo React Native
   const actionSheet = useActionSheet();
 
+  // Setting up menu for the action button and methods for each item
   const onActionPress = () => {
     const options = ['Open Library', 'Take Photo', 'Send Location', 'Cancel'];
     const cancelButtonIndex = options.length - 1;
@@ -32,6 +34,8 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     );
   }
 
+  // Uploading an image to Firebase Storage
+  // Sending the generated Firebase URL to the chat
   const uploadAndSendImage = async (imageURI) => {
     const uniqueRefString = generateReference(imageURI);
     const newUploadRef = ref(storage, uniqueRefString);
@@ -43,6 +47,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     });
   }
 
+  // Picking an image from the user's library
   const pickImage = async () => {
     let permissions = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissions?.granted) {
@@ -52,6 +57,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     }
   }
 
+  // Taking a photo on the user's device
   const takePhoto = async () => {
     let permissions = await ImagePicker.requestCameraPermissionsAsync();
     if (permissions?.granted) {
@@ -61,6 +67,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     }
   }
 
+  // Gets the user's geolocation and sends to the chat
   const getLocation = async () => {
     let permissions = await Location.requestForegroundPermissionsAsync();
     if (permissions?.granted) {
@@ -76,6 +83,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     } else Alert.alert("Permissions haven't been granted.");
   }
 
+  // Generates a unique image reference string
   const generateReference = (uri) => {
     const timeStamp = (new Date()).getTime();
     const imageName = uri.split("/")[uri.split("/").length - 1];
