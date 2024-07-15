@@ -23,12 +23,12 @@ const App = () => {
   const connectionStatus = useNetInfo();
 
   const firebaseConfig = {
-    apiKey: process.env.EXPO_PUBLIC_API_KEY,
-    authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
-    projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
-    storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
-    messagingSenderId: process.env.EXPO_PUBLIC_MSG_SENDER_ID,
-    appId: process.env.EXPO_PUBLIC_APP_ID,
+    apiKey: "AIzaSyCVzd0JeprESmvSnBhL23iiOWXXSLkXuNQ",
+    authDomain: "chat-chime-2.firebaseapp.com",
+    projectId: "chat-chime-2",
+    storageBucket: "chat-chime-2.appspot.com",
+    messagingSenderId: "537976132151",
+    appId: "1:537976132151:web:8fddbe7174d9d46f31e5b2",
   };
 
   // Initialize Firebase
