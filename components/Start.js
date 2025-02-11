@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, TextInput, ImageBackground, K
 import { getAuth, signInAnonymously } from "firebase/auth";
 
 const Start = ({ navigation }) => {
-  const colors = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
+  const colors = ['#090C08', '#28008D', '#5F45BF', '#95CCFB'];
   const [name, setName] = useState('');
   const [bgColor, setBackground] = useState('');
   // Initialize Firebase authentication handler
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "88%",
-    backgroundColor: "#757083",
+    backgroundColor: "#5F45BF",
     alignItems: "center",
     marginTop: 15,
     marginBottom: 15,
