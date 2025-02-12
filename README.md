@@ -17,6 +17,27 @@ Chat Chime is a chat app for mobile devices using React Native. The app will pro
 3. The chat must provide users with two additional communication features: sending images and location data.
 4. Data gets stored online and offline.
 
+## Technologies Used
+- React Native
+- Expo
+- Expo Go
+- Firebase
+- Gifted Chat
+- React Navigator
+- React Native Maps
+- Android Emulator
+
+## Methodologies
+- Mobile development
+- RTA through WebSockets (built-in with Firebase)
+- Testing of mobile apps, emulators
+- Storing data on the client side for native apps
+- Offline accessibility - AsyncStorage, NetInfo
+- Customizing UI components per mobile platform
+- Communication features - leveraging device’s native services such as image libraries, camera, GPS and integrate into chat (ActionSheet)
+- Styling and accessibility in React Native/for mobile apps
+- Navigation between mobile screens
+
 ## Set Up the App
 ### Clone repository
 Open your terminal and run the following.
