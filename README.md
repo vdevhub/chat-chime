@@ -3,6 +3,8 @@
 ## Description
 Chat Chime is a chat app for mobile devices using React Native. The app will provide users with a chat interface and options to share images and their location. Data such as chat messages and images are stored in [Google Firebase](https://firebase.google.com/) (Firestore Databse and Storage). Chat UI is powered by [Gifted Chat](https://github.com/FaridSafi/react-native-gifted-chat).
 
+![chat-chime-main](https://github.com/user-attachments/assets/af04ce97-e857-4082-84f1-6476b8dea15e)
+
 ## User Stories
 1. As a new user, I want to be able to easily enter a chat room so I can quickly start talking to my friends and family.
 2. As a user, I want to be able to send messages to my friends and family members to exchange the latest news.
