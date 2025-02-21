@@ -1,7 +1,10 @@
 # Meet App
 
 ## Description
-Chat Chime is a chat app for mobile devices using React Native. The app will provide users with a chat interface and options to share images and their location. Data such as chat messages and images are stored in [Google Firebase](https://firebase.google.com/) (Firestore Databse and Storage). Chat UI is powered by [Gifted Chat](https://github.com/FaridSafi/react-native-gifted-chat).
+- Chat Chime is a chat app for mobile devices using React Native. 
+- The app provides users with a chat interface and options to share images and their location. 
+- Data such as chat messages and images are stored in [Google Firebase](https://firebase.google.com/) (Firestore Database and Storage). 
+- Chat UI is powered by [Gifted Chat](https://github.com/FaridSafi/react-native-gifted-chat).
 
 ![chat-chime-main](https://github.com/user-attachments/assets/af04ce97-e857-4082-84f1-6476b8dea15e)
 
@@ -19,25 +22,25 @@ Chat Chime is a chat app for mobile devices using React Native. The app will pro
 3. The chat must provide users with two additional communication features: sending images and location data.
 4. Data gets stored online and offline.
 
-## Technologies Used
+## Tech
 - React Native
-- Expo
-- Expo Go
-- Firebase
 - Gifted Chat
 - React Navigator
 - React Native Maps
+- Firebase
+- Expo
+- Expo Go
 - Android Emulator
 
-## Methodologies
+## Methods
 - Mobile development
 - RTA through WebSockets (built-in with Firebase)
 - Testing of mobile apps, emulators
 - Storing data on the client side for native apps
 - Offline accessibility - AsyncStorage, NetInfo
-- Customizing UI components per mobile platform
-- Communication features - leveraging device’s native services such as image libraries, camera, GPS and integrate into chat (ActionSheet)
-- Styling and accessibility in React Native/for mobile apps
+- Customizing UI components per mobile platform (Android vs. iOS)
+- Communication features - leveraging a device’s native services such as image libraries, camera, GPS, and integration into chat (ActionSheet)
+- Styling and accessibility in React Native
 - Navigation between mobile screens
 
 ## Set Up the App
@@ -54,13 +57,13 @@ nvm -v
 npm -v
 ```
 
-If you don't have them instaled, please follow this [guidance](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm) to get them set up.
+If you don't have them installed, please follow this [guidance](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm) to get them set up.
 
 ### Get Expo
 1. Install Expo Go from the relevant app store for your device (iOS or Android).
 2. Head over to the [Expo Signup page](https://expo.dev/signup) and follow the instructions to create an account.
 3. Once your account is created, log in to Expo from your browser and mobile app.
-4. To log in to Expo account in the terminal, run `npx expo login` and follow the login process.
+4. To log in to your Expo account in the terminal, run `npx expo login` and follow the login process.
 5. You can see the currently logged-in account by running `expo whoami`.
 
 ### Install Dependencies
@@ -70,12 +73,12 @@ If you don't have them instaled, please follow this [guidance](https://docs.npmj
 
 ### Configure Firebase
 1. Head to [Google Firebase](https://firebase.google.com/) and Sign In in the upper-right corner. Use your existing Google credentials to sign in and create a new Firebase account.
-2. Welcome screen is now showing. Click on `Create a project` (or Add project if you’ve created Firebase projects before).
+2. The Welcome screen is now showing. Click on `Create a project` (or Add project if you’ve created Firebase projects before).
 3. Give your project a name, it's up to you, e.g. `demo-chat` or anything you want.
 4. Agree to the terms and continue.
 5. Disable `Google Analytics` option and select `Create Project`.
 6. In the left sidebar, select `Build` and `Firestore Database`.
-7. Click `Create Database`, select the region from the Multi-region label that's closest to you.
+7. Click `Create Database`, and select the region from the Multi-region label that's closest to you.
 8. On the next page, select `Start in production mode`. Hit `Next` and your new database should be automatically loaded.
 9. On the database dashboard, click `Rules` and make sure the rule states `allow read, write: if true;` instead of the default `false`. Click Publish when updated.
 10. Again, in the left sidebar, select `Build` and `Storage`.
@@ -83,15 +86,15 @@ If you don't have them instaled, please follow this [guidance](https://docs.npmj
 12. On the storage dashboard, click `Rules` and make sure the rule states `allow read, write: if true;` instead of the default `false`. Click Publish when updated.
 13. Once again, in the left sidebar, select `Build` and `Authentication`.
 14. Click on the `Sign-in method` tab and select `Anonymous`.
-15. Once clicked, a form will appear where you can toggle `Enable` on for anonymous sign-ins. Then, click `Save`, and you’ll be presented with a table showing a confirmation that anonymous sign-in has been enabled (it should say “Enabled” in the Status column).
+15. Once clicked, a form will appear where you can toggle `Enable` for anonymous sign-ins. Then, click `Save`, and you’ll be presented with a table showing a confirmation that anonymous sign-in has been enabled (it should say “Enabled” in the Status column).
 
 ### Add Firestore Configuration to Your Project
-1. In the Firestore project in your browser, open you "Project Settings" (gear icon).
+1. In the Firestore project in your browser, open your "Project Settings" (gear icon).
 2. Select the `General` tab and find a section called `Your Apps`. 
 3. Click the `Firestore for Web` button - it is the </> icon. Clicking this button will open a new screen asking you to register your web app, which will connect to the Firestore database you just created.
 4. Fill in a name for your app, e.g., demo_chat, and click `Register App` (ignore hosting) to generate the configuration code which should be presented to you at this point. Keep this open.
 5. Head back to your project and ideally open it in a code editor, e.g., VSCode.
-6. Create a new `.env` file in the root folder. This is the file with environmental variables that Expo will use to load your configuration. The keys should be names as follows and replace VALUES with your own configuration values that Firebase just generated for you (no quotes surrounding the values, only values themselves):
+6. Create a new `.env` file in the root folder. This is the file with environmental variables that Expo will use to load your configuration. The keys should be the names as follows and replace VALUES with your own configuration values that Firebase just generated for you (no quotes surrounding the values, only values themselves):
 
 ```
 EXPO_PUBLIC_API_KEY=VALUE
@@ -106,5 +109,5 @@ EXPO_PUBLIC_APP_ID=VALUE
 1. In your terminal, navigate to your project's root folder.
 2. Run `npx expo start` which should launch the Metro Bundler that serves your application.
 3. Head to your mobile Expo Go app and you should see this app appearing on the dashboard from where you launch it.
-4. Both your device with the Expo Go app and your computer you run the project from should be on the same network. Otherwise, you'll need to scan the QR code provided by the Metro Bundler on the mobile device with Expo Go which is on a different network.
+4. Both your device with the Expo Go app and the computer you run the project from should be on the same network. Otherwise, you'll need to scan the QR code provided by the Metro Bundler on the mobile device with Expo Go which is on a different network.
 
